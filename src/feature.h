@@ -885,6 +885,17 @@
 # define FEAT_MOUSE_XTERM
 #endif
 
+// disable all mouse support --smemsh-20240426220041
+#undef FEAT_MOUSE_XTERM
+#undef FEAT_MOUSE_NET
+#undef FEAT_MOUSE_DEC
+#undef FEAT_MOUSE_URXVT
+#undef DOS_MOUSE
+#undef FEAT_MOUSE_PTERM
+#undef FEAT_MOUSE_GPM
+#undef FEAT_SYSMOUSE
+#undef FEAT_MOUSE_JS
+
 /*
  * +clipboard		Clipboard support.  Always used for the GUI.
  * +xterm_clipboard	Unix only: Include code for handling the clipboard

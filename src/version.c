@@ -330,7 +330,21 @@ static char *(features[]) =
 	"-mksession",
 #endif
 	"+modify_fname",
+
+#if \
+ defined(FEAT_MOUSE_XTERM) || \
+ defined(FEAT_MOUSE_NET) || \
+ defined(FEAT_MOUSE_DEC) || \
+ defined(FEAT_MOUSE_URXVT) || \
+ defined(DOS_MOUSE) || \
+ defined(FEAT_MOUSE_PTERM) || \
+ defined(FEAT_MOUSE_GPM) || \
+ defined(FEAT_SYSMOUSE) || \
+ defined(FEAT_MOUSE_JS)
 	"+mouse",
+#else
+        "-mouse",
+#endif
 #ifdef FEAT_MOUSESHAPE
 	"+mouseshape",
 #else
@@ -373,7 +387,11 @@ static char *(features[]) =
 #endif
 
 #if defined(UNIX) || defined(VMS)
+# ifdef FEAT_MOUSE_XTERM
 	"+mouse_sgr",
+# else
+        "-mouse_sgr",
+# endif
 # ifdef FEAT_SYSMOUSE
 	"+mouse_sysmouse",
 # else
@@ -384,7 +402,11 @@ static char *(features[]) =
 # else
 	"-mouse_urxvt",
 # endif
+# ifdef FEAT_MOUSE_XTERM
 	"+mouse_xterm",
+# else
+	"-mouse_xterm",
+# endif
 #endif
 
 #ifdef FEAT_MBYTE_IME

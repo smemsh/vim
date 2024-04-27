@@ -319,6 +319,7 @@ CClink = $(CC)
 # have GTK and/or Motif.  Also use --without-x if you don't want X11
 # at all.
 #CONF_OPT_GUI = --disable-gui
+CONF_OPT_GUI = --disable-gui
 
 # Uncomment one of these lines if you have that GUI but don't want to use it.
 # The automatic check will use another one that can be found.
@@ -378,6 +379,7 @@ CClink = $(CC)
 # cannot be configured.  Without this Vim will be build anyway, without
 # the failing interfaces.
 #CONF_OPT_FAIL = --enable-fail-if-missing
+CONF_OPT_FAIL = --enable-fail-if-missing
 
 # LUA
 # Uncomment one of these when you want to include the Lua interface.
@@ -388,6 +390,7 @@ CClink = $(CC)
 # Set PATH environment variable to find lua or luajit executable.
 # This requires at least "normal" features, "tiny" doesn't work.
 #CONF_OPT_LUA = --enable-luainterp
+CONF_OPT_LUA = --enable-luainterp
 #CONF_OPT_LUA = --enable-luainterp=dynamic
 #CONF_OPT_LUA = --enable-luainterp --with-luajit
 #CONF_OPT_LUA = --enable-luainterp=dynamic --with-luajit
@@ -442,6 +445,15 @@ CClink = $(CC)
 #CONF_OPT_PYTHON3 = --enable-python3interp --with-python3-command=python3.6
 #CONF_OPT_PYTHON3 = --enable-python3interp=dynamic
 
+# this can be given a python3 that links to a dynamiclly linked executable, it
+# seems to only use it to link to the libpython<major>.<minor>.a, still builds
+# a static vim executable, and does not appear to execve("python3") according
+# to strace, even after :py3 print('hello').  and prints correct sys.version
+# note: using dynamic build of python did not work.  needed to link to our
+# pystatic --smemsh20240828184531
+#
+CONF_OPT_PYTHON3 = --enable-python3interp --with-python3-command=/opt/pystatic-3.12.5/bin/python3
+
 # RUBY
 # Uncomment this when you want to include the Ruby interface.
 # First one for static linking, second one for loading when used.
@@ -463,11 +475,13 @@ CClink = $(CC)
 # CSCOPE
 # Uncomment this when you want to include the Cscope interface.
 #CONF_OPT_CSCOPE = --enable-cscope
+CONF_OPT_CSCOPE = --enable-cscope
 
 # NETBEANS - NetBeans interface. Only works with Motif, GTK, and gnome.
 # Motif version must have XPM libraries (see |netbeans-xpm|).
 # Uncomment this when you do not want the netbeans interface.
 #CONF_OPT_NETBEANS = --disable-netbeans
+CONF_OPT_NETBEANS = --disable-netbeans
 
 # CHANNEL - inter process communication. Same conditions as NetBeans.
 # Uncomment this when you do not want inter process communication.
@@ -480,6 +494,7 @@ CClink = $(CC)
 # emulator support in the huge build.
 #CONF_OPT_TERMINAL = --enable-terminal
 #CONF_OPT_TERMINAL = --disable-terminal
+CONF_OPT_TERMINAL = --disable-terminal
 
 # MULTIBYTE - To edit multi-byte characters.
 # This is now always enabled.
@@ -487,6 +502,7 @@ CClink = $(CC)
 # When building with "huge" features, right-left and Arabic
 # features are enabled.  Use this to disable them.
 #CONF_OPT_MULTIBYTE = --disable-rightleft --disable-arabic
+CONF_OPT_MULTIBYTE = --disable-rightleft --disable-arabic
 
 # NLS - National Language Support
 # Uncomment this when you do not want to support translated messages, even
@@ -498,6 +514,7 @@ CClink = $(CC)
 # When omitted it's automatically enabled for the X-windows GUI.
 #CONF_OPT_INPUT = --enable-xim
 #CONF_OPT_INPUT = --disable-xim
+CONF_OPT_INPUT = --disable-xim
 
 # FONTSET - X fontset support for output of languages with many characters.
 # Uncomment this when you want to output a multibyte language.
@@ -514,16 +531,19 @@ CClink = $(CC)
 #CONF_OPT_GPM = --disable-gpm
 # Use this to enable dynamic loading of the GPM library.
 #CONF_OPT_GPM = --enable-gpm=dynamic
+CONF_OPT_GPM = --disable-gpm
 
 # sysmouse - For mouse support on FreeBSD and DragonFly console via sysmouse
 # Uncomment this when you do not want do include sysmouse support, even
 # though you have /dev/sysmouse and includes.
 #CONF_OPT_SYSMOUSE = --disable-sysmouse
+CONF_OPT_SYSMOUSE = --disable-sysmouse
 
 # libcanberra - For sound support.  Default is on for huge features.
 # Uncomment one of the two to chose otherwise.
 # CONF_OPT_CANBERRA = --enable-canberra
 # CONF_OPT_CANBERRA = --disable-canberra
+CONF_OPT_CANBERRA = --disable-canberra
 
 # libsodium - For enhanced encryption.  Default is on.
 # Uncomment the next line to not use libsodium
@@ -535,9 +555,11 @@ CClink = $(CC)
 #CONF_OPT_FEAT = --with-features=tiny
 #CONF_OPT_FEAT = --with-features=normal
 #CONF_OPT_FEAT = --with-features=huge
+CONF_OPT_FEAT = --with-features=huge
 
 # COMPILED BY - For including a specific e-mail address for ":version".
 #CONF_OPT_COMPBY = "--with-compiledby=John Doe <JohnDoe@yahoo.com>"
+CONF_OPT_COMPBY = "--with-compiledby=Scott Mcdermott <scott@smemsh.net>"
 
 # X WINDOWS DISABLE - For creating a plain Vim without any X11 related fancies
 # (otherwise Vim configure will try to include xterm titlebar access)
@@ -545,6 +567,7 @@ CClink = $(CC)
 # When both GUI and X11 have been disabled this may save about 15% of the
 # code and make Vim startup quicker.
 #CONF_OPT_X = --without-x
+CONF_OPT_X = --without-x
 
 # X WINDOWS DIRECTORY - specify X directories
 # If configure can't find you X stuff, or if you have multiple X11 derivatives
@@ -581,6 +604,7 @@ CClink = $(CC)
 #CC = cc
 #CC = gcc
 #CC = clang
+CC = gcc
 
 # COMPILER FLAGS - change as you please. Either before running {{{1
 # configure or afterwards. For examples see below.
@@ -589,6 +613,17 @@ CClink = $(CC)
 # When not defined, configure will try to use -O2 for gcc and -O for others.
 #CFLAGS = -g
 #CFLAGS = -O
+CFLAGS = -I/usr/include/ncursesw -I/opt/openssl-3.0.14/include
+
+# note: this causes linking error, have to put -lm at the end not the
+# beginning.  did this in $VIMTARGET rule
+#
+LDFLAGS = -static -L/opt/openssl-3.0.14/lib64 -L/opt/openssl-3.0.14/lib
+ifeq ($(shell . /etc/lsb-release; echo $${DISTRIB_RELEASE%%.*}), 18)
+	EXTRA_LIBS = -l:libcrypt.a -l:libexpat.a -l:libz.a -l:libffi.a -l:libuuid.a -l:liblzma.a -l:libreadline.a -l:libgdbm.a -l:libbz2.a -l:libpanelw.a -l:libncursesw.a -l:libtinfo.a -l:libgpm.a -l:libsqlite3.a -l:libssl.a -l:libcrypto.a -l:librt.a -l:libpthread.a -l:libdl.a -l:libz.a -l:libm.a
+else
+	EXTRA_LIBS = -l:libcrypt.a -l:libexpat.a -l:libz.a -l:libffi.a -l:libuuid.a -l:liblzma.a -l:libreadline.a -l:libgdbm_compat.a -l:libgdbm.a -l:libbz2.a -l:libpanelw.a -l:libncursesw.a -l:libtinfo.a -l:libsqlite3.a -l:libssl.a -l:libcrypto.a -l:libz.a -l:libm.a
+endif
 
 # Optimization limits - depends on the compiler.  Automatic check in configure
 # doesn't work very well, because many compilers only give a warning for
@@ -1403,12 +1438,12 @@ ALL_LIBS = \
 	   $(X_LIBS) \
 	   $(X_EXTRA_LIBS) \
 	   $(MZSCHEME_LIBS) \
+	   $(PYTHON3_LIBS) \
 	   $(LIBS) \
 	   $(EXTRA_LIBS) \
 	   $(LUA_LIBS) \
 	   $(PERL_LIBS) \
 	   $(PYTHON_LIBS) \
-	   $(PYTHON3_LIBS) \
 	   $(TCL_LIBS) \
 	   $(RUBY_LIBS) \
 	   $(PROFILE_LIBS) \
